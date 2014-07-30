@@ -16,7 +16,7 @@ gulp.task('default', function(cb) {
 
 gulp.task('mvc', function (cb) {
     return gulp.src([
-            'public/js/app.js',
+            'public/js/App.js',
             'public/build/js/templates.js',
             'public/js/modules/**/models/*.js',
             'public/js/modules/**/views/*.js',
@@ -25,16 +25,18 @@ gulp.task('mvc', function (cb) {
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc.js'))
         .pipe(browserify({insertGlobals : true, debug : true}))
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));
 });
 
 gulp.task('watch', function(cb) {
-    gulp.watch('public/js/index.js', ['mvc']);
+    gulp.watch('public/js/App.js', ['mvc']);
+    gulp.watch('public/build/js/templates.js', ['mvc']);
     gulp.watch('public/js/modules/**/models/*.js', ['mvc']);
     gulp.watch('public/js/modules/**/views/*.js', ['mvc']);
     gulp.watch('public/js/modules/**/*.js', ['mvc']);
+    gulp.watch('public/js/modules/**/templates/*.hbs', ['templates']);
 });
 
 gulp.task('templates', function(cb) {
