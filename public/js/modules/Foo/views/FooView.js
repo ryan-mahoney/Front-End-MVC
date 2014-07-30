@@ -1,5 +1,5 @@
 var FooView = Backbone.Marionette.ItemView.extend({
-	template: "#sample",
+	template: "#FooSample",
 	events: {
 		"click .foo":          "foo"
 	},
