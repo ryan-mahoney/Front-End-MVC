@@ -1,1 +1,0 @@
-var FooModel = Backbone.Model.extend();

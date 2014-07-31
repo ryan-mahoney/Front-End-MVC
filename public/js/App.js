@@ -5,6 +5,8 @@ var _ = require('underscore'),
 
 Backbone.$ = $;
 var Marionette = require('backbone.marionette');
+jQuery = $;
+var Semantic = require('../../public/vendor/semantic/javascript/semantic.js');
 Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(template) {
 	return App.Templates[template];
 };
