@@ -8,14 +8,14 @@ $app->get('/', function () {
 });
 
 $app->group('/api', function() use ($app) {
-	$app->get('/blogs', function () use ($app) {
-		$app->contentType('application/json;charset=utf-8');
-		echo json_encode([
-			'blogs' => [
-				['id' => 1, 'title' => 'Blog Post A'],
-				['id' => 2, 'title' => 'Blog Post B']
-			]
-		]);
-	});
+    $app->get('/blogs', function () use ($app) {
+        $app->contentType('application/json;charset=utf-8');
+        echo json_encode([
+            'blogs' => [
+                ['id' => 1, 'title' => 'Blog Post A'],
+                ['id' => 2, 'title' => 'Blog Post B']
+            ]
+        ]);
+    });
 });
 $app->run();
