@@ -24,7 +24,19 @@ gulp.task('mvc', function (cb) {
         ])
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc.js'))
-        .pipe(browserify({insertGlobals : true, debug : true}))
+        .pipe(browserify({
+            insertGlobals : true, 
+            debug : true,
+            shim: {
+                serializeObject: {
+                    path: 'public/vendor/jquery.serializeObject.min.js',
+                    exports: 'serializeObject',
+                    depends: {
+                        jquery: '$'
+                    }
+                }
+            }
+        }))
         //.pipe(uglify())
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));

@@ -1,0 +1,12 @@
+#app-page {
+	width: 80%;
+	margin: auto;
+}
+
+.blog-show {
+	cursor: pointer;
+}
+
+.blog-edit-button {
+	float: right;
+}

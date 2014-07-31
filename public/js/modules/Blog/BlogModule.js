@@ -17,6 +17,15 @@ var BlogController = {
                 model: model
             }));
         });
+    },
+    edit: function (id) {
+        var model = new BlogModel({});
+        model.set({id: id});
+        model.fetch().done(function () {
+            App.mainRegion.show(new BlogEditView({
+                model: model
+            }));
+        });
     }
 };
 
@@ -28,7 +37,8 @@ App.module("BlogModule", {
 
             appRoutes: {
                 "blogs": "index",
-                "blog/:id": "show"
+                "blog/:id": "show",
+                "blog/:id/edit": "edit"
             }
         });
 

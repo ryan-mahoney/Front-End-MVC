@@ -1,12 +1,1 @@
-[
-    {
-        "id": 1,
-        "title": "Blog Post A", 
-        "body": "<p>This is a sample blog post.</p>"
-    },
-    {
-        "id":2,
-        "title": "Blog Post B",
-        "body": "<p>Another sample blog post.</p>"
-    }
-]
+[{"id":"1","title":"Blog Post 1","body":"This is a sample blog post."},{"id":"2","title":"Blog Post 2","body":"Another sample blog post."}]

@@ -26,8 +26,15 @@ $app->group('/api', function() use ($app, $data) {
         $app->response->setStatus(503);
     });
 
-    $app->put('/blog/:id', function ($id) {
-        //update
+    $app->put('/blog/:id', function ($id) use ($data, $app) {
+        $put = json_decode($app->request()->getBody(), true);
+        foreach ($data as &$blog) {
+            if ($blog['id'] == $id) {
+                $blog = $put;
+                file_put_contents(__DIR__ . '/../data/blogs.json', json_encode($data));
+                return;
+            }
+        }
     });
 
     $app->post('/blog/:id', function ($id) {

@@ -1,10 +1,31 @@
 <html>
 <head>
-	<script src="../build/js/mvc.js"></script>
-	<style type="text/css" ></style>
-	<link rel="stylesheet" href="../vendor/semantic/css/semantic.min.css">
+    <script src="../build/js/mvc.js"></script>
+    <link rel="stylesheet" href="../vendor/semantic/css/semantic.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
-<div class="ui segment" id="content"></div>
-</body>
+    <body>
+        <div id="app-page">
+            <div class="ui grid">
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <div class="ui segment"><h1 class="ui header">Handlebars Marionette Boilerplate</h1></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <div class="ui grid">
+                            <div class="four wide column">
+                                <div class="ui segment">
+                                    <div class="ui top attached label">Overview</div>
+                                    <p>This is an example of how to build a complex front-end website using Backbone, Marionette, Browserify and Gulp.</p>
+                                </div>
+                            </div>
+                            <div class="twelve wide column" id="content">Sidebar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

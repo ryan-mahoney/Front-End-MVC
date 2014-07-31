@@ -2,10 +2,10 @@ var BlogShowView = Backbone.Marionette.ItemView.extend({
     template: "#BlogShow",
     className: 'blog-single',
     events: {
-        "click .blog-title":          "titleEdit"
+        "click .blog-edit-button":          "blogEdit"
     },
-    titleEdit: function (ev) {
-        var $title = $(ev.currentTarget);
-        console.log($title.html());
+    blogEdit: function (e) {
+    	var id = $(e.currentTarget).attr('data-id');
+        window.location.hash = 'blog/' + id + '/edit';
     }
 });
