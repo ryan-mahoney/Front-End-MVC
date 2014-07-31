@@ -10,14 +10,9 @@ This is a boilerplate Backbone-Marionette project that:
 - allows for putting files in sensible folder layouts
 - supports complex sites via module structure
 - pre-compiles handlebar templates
+- create meaningful app
+- bundle simple resful server
 
 Todo:
 
-- create meaningful app
 - add unit tests
-- bundle simple resful server
-
-App Concepts:
-
-- Pull weather from external API
-- 
