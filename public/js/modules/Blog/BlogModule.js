@@ -9,8 +9,9 @@ var BlogController = {
             }));
         });
     },
-    show: function (blogId) {
+    show: function (id) {
         var model = new BlogModel({});
+        model.set({id: id});
         model.fetch().done(function () {
             App.mainRegion.show(new BlogShowView({
                 model: model
@@ -26,8 +27,8 @@ App.module("BlogModule", {
             controller: BlogController,
 
             appRoutes: {
-                "index": "index",
-                "show/:blogId": "show"
+                "blogs": "index",
+                "blog/:id": "show"
             }
         });
 
@@ -36,9 +37,8 @@ App.module("BlogModule", {
         });
 
         BlogModule.on("start", function() {
-            BlogController.index();
             if (App.getCurrentRoute() === ""){
-                BlogController.home();
+                window.location.hash = 'blogs';
             }
         });
     }

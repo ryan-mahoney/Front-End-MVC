@@ -16,3 +16,8 @@ Todo:
 - create meaningful app
 - add unit tests
 - bundle simple resful server
+
+App Concepts:
+
+- Pull weather from external API
+- 

@@ -24,7 +24,7 @@ App.addRegions({
 });
 
 App.getCurrentRoute = function() {
-	return Backbone.history.fragment;
+	return Backbone.history.fragment || '';
 };
 
 App.on("start", function() {

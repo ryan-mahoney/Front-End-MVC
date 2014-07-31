@@ -5,11 +5,11 @@ var BlogIndexView = Backbone.Marionette.ItemView.extend({
     },
     show: function (ev) {
         var id = $(ev.currentTarget).attr('data-id');
-        BlogController.show(id);
+        window.location.hash = 'blog/' + id;
     }
 });
 
 var BlogIndexListView = Backbone.Marionette.CollectionView.extend({
-    className: 'test',
+    className: 'blog-list',
     childView: BlogIndexView
 });

@@ -1,3 +1,9 @@
-{{#each blogs}}
-    <a data-id="{{id}}" class="blog-show">{{title}}</a><br />
-{{/each}}
+<table class="ui table">
+	<tbody>
+		{{#each blogs}}
+			<tr>
+				<td><a data-id="{{id}}" class="blog-show">{{title}}</a></td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
