@@ -5,7 +5,7 @@ var BlogIndexView = Backbone.Marionette.ItemView.extend({
 	},
 	show: function (ev) {
 		var id = $(ev.currentTarget).attr('data-id');
-		BlogController::show(id);
+		BlogController.show(id);
 	}
 });
 
