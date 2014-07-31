@@ -27,18 +27,25 @@ $app->group('/api', function() use ($app, $data) {
     });
 
     $app->put('/blog/:id', function ($id) use ($data, $app) {
+        sleep(2);
         $put = json_decode($app->request()->getBody(), true);
         foreach ($data as &$blog) {
             if ($blog['id'] == $id) {
                 $blog = $put;
                 file_put_contents(__DIR__ . '/../data/blogs.json', json_encode($data));
+                echo json_encode($put);
                 return;
             }
         }
     });
 
-    $app->post('/blog/:id', function ($id) {
-        //create
+    $app->post('/blog', function () use ($data, $app) {
+        sleep(2);
+        $post = json_decode($app->request()->getBody(), true);
+        $post['id'] = uniqid();
+        $data[] = $post;
+        file_put_contents(__DIR__ . '/../data/blogs.json', json_encode($data));
+        echo json_encode($post);
     });
 });
 

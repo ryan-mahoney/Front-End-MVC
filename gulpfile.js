@@ -37,7 +37,7 @@ gulp.task('mvc', function (cb) {
                 }
             }
         }))
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));
 });
