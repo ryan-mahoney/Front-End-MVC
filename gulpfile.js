@@ -8,12 +8,15 @@ var browserify = require('gulp-browserify'),
     handlebars = require('gulp-handlebars'),
     defineModule = require('gulp-define-module'),
     declare = require('gulp-declare'),
-    runSequence = require('gulp-run-sequence'),
+    runSequence = require('run-sequence'),
     uuid = require('node-uuid'),
     fs = require('fs');
+    concatUtil = require('gulp-concat-util'),
+    glob = require('glob'),
+    path = require('path');
 
 gulp.task('default', function(cb) {
-    runSequence('templates', 'mvc', 'clean', cb);
+    runSequence('helpers-step-1', 'helpers-step-2', 'templates', 'mvc', 'clean', cb);
 });
 
 gulp.task('mvc', function (cb) {
@@ -24,9 +27,10 @@ gulp.task('mvc', function (cb) {
     return gulp.src([
             'js/App.js',
             'public/build/js/templates.js',
+            'public/build/js/helpers.js',
             'js/modules/**/models/*.js',
             'js/modules/**/views/*.js',
-            'js/modules/**/*.js'
+            'js/modules/**/*Module.js'
         ])
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc-' + version + '.js'))
@@ -49,11 +53,12 @@ gulp.task('mvc', function (cb) {
 
 gulp.task('watch', function(cb) {
     gulp.watch('js/App.js', ['default']);
-    gulp.watch('public/build/js/templates.js', ['default']);
+    gulp.watch('js/helpers/*.js', ['default']);
     gulp.watch('js/modules/**/models/*.js', ['default']);
     gulp.watch('js/modules/**/views/*.js', ['default']);
-    gulp.watch('js/modules/**/*.js', ['default']);
+    gulp.watch('js/modules/**/*Module.js', ['default']);
     gulp.watch('js/modules/**/templates/*.hbs', ['default']);
+    gulp.watch('js/modules/**/helpers/*.hbs', ['default']);
 });
 
 gulp.task('templates', function(cb) {
@@ -70,5 +75,31 @@ gulp.task('templates', function(cb) {
 });
 
 gulp.task('clean', function (cb) {
-    return gulp.src(['public/build/js/templates.js'], {read: false}).pipe(clean());
+    return gulp.src(['public/build/js/templates.js', 'public/build/tmp/helpers/*', 'public/build/js/helpers.js'], {read: false}).pipe(clean());
+});
+
+gulp.task('helpers', function (cb) {
+    runSequence('helpers-step-1', 'helpers-step-2', cb);
+});
+
+gulp.task('helpers-step-1', function (cb) {
+    var process = function(file) {
+        var name = file.split('/').pop().replace(/\.js$/, '');
+        gulp.src(file)
+            .pipe(concatUtil(name + '.js', {process: function (src) { return 'Handlebars.registerHelper("' + name + '", ' + src + ');'; }}))
+            .pipe(gulp.dest('public/build/tmp/helpers'));
+    };
+    var files = glob.sync('js/modules/**/helpers/*.js');
+    files.map(process);
+
+    var files = glob.sync('js/helpers/*.js');
+    files.map(process);
+
+    return gulp.src('js/modules/**/helpers/*.js');
+});
+
+gulp.task('helpers-step-2', function (cb) {
+    return gulp.src(['public/build/tmp/helpers/*.js'])
+        .pipe(concatUtil('helpers.js', {separator: '\n'}))
+        .pipe(gulp.dest('public/build/js'));
 });

@@ -1,5 +1,6 @@
 node_modules
-public/build/js/*
-public/build/css/*
+public/build/js
+public/build/css
+public/build/tmp
 composer.lock
 vendor
