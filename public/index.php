@@ -30,7 +30,7 @@ $app->group('/api', function() use ($app, $data) {
     });
 
     $app->put('/blog/:id', function ($id) use ($data, $app) {
-        sleep(2);
+        sleep(1);
         $put = json_decode($app->request()->getBody(), true);
         foreach ($data as &$blog) {
             if ($blog['id'] == $id) {
@@ -43,7 +43,7 @@ $app->group('/api', function() use ($app, $data) {
     });
 
     $app->post('/blog', function () use ($data, $app) {
-        sleep(2);
+        sleep(1);
         $post = json_decode($app->request()->getBody(), true);
         $post['id'] = uniqid();
         $data[] = $post;
@@ -52,10 +52,17 @@ $app->group('/api', function() use ($app, $data) {
     });
 
     $app->post('/contact', function () use ($app) {
-        sleep(2);
+        sleep(1);
         $post = json_decode($app->request()->getBody(), true);
         $post['id'] = uniqid();
         echo json_encode($post);
+    });
+
+    $app->put('/contact/:id', function ($id) use ($app) {
+        sleep(1);
+        $put = json_decode($app->request()->getBody(), true);
+        $put['id'] = uniqid();
+        echo json_encode($put);
     });
 });
 

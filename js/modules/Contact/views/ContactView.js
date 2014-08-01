@@ -10,13 +10,14 @@ var ContactView = Backbone.Marionette.ItemView.extend({
         $('#contact-form').addClass('loading');
         var model = this.model;
         var data = $('#contact-form').serializeObject();
-        if (data['id'] === '') {
-            delete data['id'];
+        if (data.id === '') {
+            delete data.id;
         }
         model.set(data);
         model.save().done(function () {
-            console.log('Reset Form');
-            console.log('Show Modal');
+            $('#contact-form')[0].reset();
+            $('#contact-form').removeClass('loading');
+            $('.contact-modal').modal('show');
         });
     }
 });

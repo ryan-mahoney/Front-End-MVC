@@ -13,7 +13,8 @@ var browserify = require('gulp-browserify'),
     fs = require('fs');
     concatUtil = require('gulp-concat-util'),
     glob = require('glob'),
-    path = require('path');
+    path = require('path'),
+    plumber = require('gulp-plumber');
 
 gulp.task('default', function(cb) {
     runSequence('helpers-step-1', 'helpers-step-2', 'templates', 'mvc', 'clean', cb);
@@ -23,7 +24,7 @@ gulp.task('mvc', function (cb) {
     var version = uuid.v4();
     fs.writeFile('public/build/js/version.php', '<?php return "' + version + '";');
     gulp.src('public/build/js/mvc-*', {read: false}).pipe(clean());
-        
+
     return gulp.src([
             'js/App.js',
             'public/build/js/templates.js',
@@ -32,6 +33,8 @@ gulp.task('mvc', function (cb) {
             'js/modules/**/views/*.js',
             'js/modules/**/*Module.js'
         ])
+        .pipe(plumber())
+        .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc-' + version + '.js'))
         .pipe(browserify({
@@ -69,7 +72,9 @@ gulp.task('templates', function(cb) {
             namespace: 'Templates',
             root: 'App'
         }))
-        .pipe(concat('templates.js'))
+        .pipe(concatUtil('templates.js'))
+        .pipe(concatUtil.header('/* jshint ignore:start */\n'))
+        .pipe(concatUtil.footer('\n/* jshint ignore:end */'))
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));
 });

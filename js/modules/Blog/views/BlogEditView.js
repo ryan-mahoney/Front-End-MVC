@@ -11,8 +11,8 @@ var BlogEditView = Backbone.Marionette.ItemView.extend({
         $('#blog-form').addClass('loading');
         var model = this.model;
         var data = $('#blog-form').serializeObject();
-        if (data['id'] === '') {
-            delete data['id'];
+        if (data.id === '') {
+            delete data.id;
         }
         model.set(data);
         model.save().done(function () {

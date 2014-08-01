@@ -31,7 +31,9 @@
     "gulp-concat-util": "^0.2.3",
     "glob": "^4.0.5",
     "path": "^0.4.9",
-    "run-sequence": "^0.3.6"
+    "run-sequence": "^0.3.6",
+    "gulp-replace": "^0.4.0",
+    "gulp-plumber": "^0.6.4"
   },
   "devDependencies": {},
   "scripts": {
