@@ -1,12 +1,17 @@
 <div class="ui grid">
 	<div class="column eight wide">
-		<h3 class="ui header">Blogs</h3>
+		<h2 class="ui header">Blogs</h2>
 	</div>
 	<div class="column eight wide">
-		<a class="blog-button blog-add-button ui button">Add</a>
+		<a class="blog-button blog-add-button ui button teal">Add</a>
 	</div>
 </div>
-<table class="ui celled table segment">
+<table class="ui celled table segment table-edit">
+  	<thead>
+    	<tr>
+    		<th>Post Title</th>
+	  	</tr>
+	</thead>
 	<tbody>
 		{{#each blogs}}
 			<tr data-id="{{id}}" class="blog-show">

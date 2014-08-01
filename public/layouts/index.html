@@ -1,27 +1,44 @@
 <html>
-<head>
-    <script src="/build/js/mvc-{{JSMVC-VERSION}}.js"></script>
-    <link rel="stylesheet" href="/vendor/semantic/css/semantic.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-    <body>
-        <div id="app-page">
+    <head>
+        <script src="/build/js/mvc-{{JSMVC-VERSION}}.js"></script>
+        <link rel="stylesheet" href="/vendor/semantic/css/semantic.min.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body id="app-page">
+        <div class="content">
             <div class="ui grid">
                 <div class="row">
                     <div class="sixteen wide column">
-                        <div class="ui segment"><h1 class="ui header">Handlebars Marionette Boilerplate</h1></div>
+                        <br />
+                        <div class="ui segment" style="cursor: pointer" onclick="window.location='/#blogs'">
+                            <h1 class="ui header">Building Complex JS Apps</h1>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="padding-top: 0px">
                     <div class="sixteen wide column">
                         <div class="ui grid">
                             <div class="four wide column">
-                                <div class="ui segment">
+                                
+
+                                <div class="ui vertical menu" style="width: 100%">
+                                    <a class="active teal item" href="#/blogs">Blogs<div class="ui teal label">1</div></a>
+                                    <a class="item" href="#/contact">Contact Form</a>
+                                </div>
+
+
+
+                                <div class="ui segment purple inverted">
                                     <div class="ui top attached label">Overview</div>
                                     <p>This is an example of how to build a complex front-end website using Backbone, Marionette, Browserify and Gulp.</p>
                                 </div>
                             </div>
-                            <div class="twelve wide column" id="content">Sidebar</div>
+                            <div class="twelve wide column" id="content">
+                                
+                                <!-- main content region -->
+
+                            </div>
                         </div>
                     </div>
                 </div>

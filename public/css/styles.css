@@ -1,4 +1,4 @@
-#app-page {
+.content {
 	width: 80%;
 	margin: auto;
 }
@@ -9,4 +9,262 @@
 
 .blog-button {
 	float: right;
+}
+
+
+
+
+
+ui.table.table-edit tbody tr:hover {
+    box-shadow: 2px 0 0 #119000 inset;
+}
+.ui.table.table-edit tbody tr:hover td {
+    background-color: #F2F8F0 !important;
+    color: #119000 !important;
+}
+
+
+
+
+
+/*******************************
+        Highlighted Colors
+*******************************/
+
+::-webkit-selection {
+  background-color: #FFFFCC;
+  color: #555555;
+}
+::-moz-selection {
+  background-color: #FFFFCC;
+  color: #555555;
+}
+::selection {
+  background-color: #FFFFCC;
+  color: #555555;
+}
+
+h1::-moz-selection,
+h2::-moz-selection,
+h3::-moz-selection {
+  background-color: #F1C1C2;
+  color: #222222;
+}
+h1::selection,
+h2::selection,
+h3::selection {
+  background-color: #F1C1C2;
+  color: #222222;
+}
+.ui *::-moz-selection {
+  background-color: #CCE2FF;
+}
+.ui *::selection {
+  background-color: #CCE2FF;
+}
+
+/*******************************
+             Global
+*******************************/
+
+html,
+body {
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body#app-page {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif/*rtl:prepend:"Droid Arabic Kufi","Droid Sans", */;
+  background: #FCFCFC url(../images/bg.jpg) repeat;
+  margin: 0px;
+  padding: 0px;
+  color: #555555;
+  min-width: 320px;
+}
+body > .content  {
+  background: #FCFCFC url(../images/bg.jpg) repeat;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Source Sans Pro", "Helvetica Neue", "Helvetica", "Arial", sans-serif/*rtl:prepend:"Droid Arabic Kufi","Droid Sans", */;
+}
+
+/*
+p,
+ul,
+.ui.grid,
+li {
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size-adjust: none;
+}*/
+
+
+ul.list {
+  list-style-type: disc;
+}
+ul.list li {
+  list-style-position: outside;
+}
+
+
+/* text and headers */
+h1 {
+  margin: 0px 0px 20px;
+  padding: 50px 0px 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+h4 + p {
+  margin: 0px 0px 20px;
+}
+pre {
+  background-color: #F0F0F0;
+}
+/*rtl:ignore*/
+pre.console {
+  background-color: transparent;
+  line-height: 1.6;
+  font-family:  'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+  height: 300px;
+  overflow: auto;
+  direction:ltr;
+}
+code {
+  background-color: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  font-family: Courier New;
+  font-size: 14px;
+  margin: 0.25em;
+  padding: 0.125em 0.5em;
+  vertical-align: middle;
+}
+pre code {
+  border: none;
+  padding: 0px;
+}
+table pre,
+table code {
+  margin: 0px !important;
+  padding: 0px;
+  background-color: transparent;
+}
+p {
+  margin: 1em 0em;
+}
+p:first-child {
+  margin-top: 0em;
+}
+p:last-child {
+  margin-bottom: 0em;
+}
+/* links */
+a {
+  color: #009FDA;
+  text-decoration: none;
+}
+a:hover {
+  color: #00BAFF;
+}
+
+
+
+
+
+
+
+
+
+#app-page #menu .item {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+#app-page #menu .hide.item {
+  display: none;
+}
+
+#app-page #menu .item .item {
+  font-size: 0.875rem;
+}
+#app-page .segment > .dimmer {
+  z-index: 800;
+}
+
+/* segment headers */
+#app-page > .content > .page > .segment,
+#app-page > .segment {
+  margin: 0px 0px 3em;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+#app-page > .tab.segment {
+  padding-bottom: 0em;
+  margin-bottom: 2em;
+}
+
+#app-page > .tab.segment .fixed .tabular.menu {
+  position: fixed;
+  top: 50px;
+}
+#app-page > .tab.segment .vertical.menu {
+  display: none;
+  margin: 2rem 0em 1rem;
+}
+#app-page > .tab.segment .tabular.menu {
+  margin: 2rem 0em 0em;
+  border-bottom: none;
+}
+#app-page > .tab.segment .tabular.menu .active.item {
+  background-color: #FAFAFA;
+  border-bottom-color: #FAFAFA;
+}
+
+
+#app-page .download.menu {
+  margin-top: 0em;
+  margin-bottom: 3rem;
+}
+
+#app-page .main.menu {
+  min-width: 320px;
+  z-index: 900;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: margin 0.3s ease;
+  -moz-transition: margin 0.3s ease;
+  -o-transition: margin 0.3s ease;
+  -ms-transition: margin 0.3s ease;
+  transition: margin 0.3s ease;
+}
+#app-page .main.menu iframe {
+  margin: 0px 0px 0px 0px;
+}
+/* lists */
+#app-page .features {
+  list-style-position: inside;
+  margin: 10px 0px 0px;
+  padding: 0px;
+}
+#app-page .features li {
+  list-style-type: disc;
+  margin: 0px 0px 10px;
+  font-weight: bold;
+}
+
+#app-page .advertisement {
+  float: right;
+  margin-left: 2em;
 }
