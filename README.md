@@ -1,7 +1,7 @@
-Building Complex Javascript Applications
-=========================================
+Building Complex JS Apps
+========================
 
-### Qucik Start
+### Quick Start
 
 ```
 git clone git@github.com:ryan-mahoney/Front-End-MVC.git
