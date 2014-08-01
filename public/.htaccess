@@ -1,3 +1,14 @@
+# REWRITE
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
+
+# EXPIRE
+ExpiresActive on
+ExpiresByType application/javascript    "access plus 1 year"
+ExpiresByType text/javascript           "access plus 1 year"
+Header append Cache-Control             "public"
+
+# GZIP
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/plain text/html text/xml text/javascript application/javascript applciation/xml

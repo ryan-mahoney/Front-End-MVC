@@ -2,11 +2,14 @@
 include __DIR__ . '/../vendor/autoload.php';
 
 $data = json_decode(file_get_contents(__DIR__ . '/../data/blogs.json'), true);
+$version = require __DIR__ . '/build/js/version.php';
 
 $app = new \Slim\Slim();
 
-$app->get('/', function () {
+$app->get('/', function () use ($version) {
+    ob_start();
     include __DIR__ . '/layouts/index.html';
+    echo str_replace('{{JSMVC-VERSION}}', $version, ob_get_clean());
 });
 
 $app->group('/api', function() use ($app, $data) {
