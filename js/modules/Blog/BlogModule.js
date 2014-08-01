@@ -38,10 +38,8 @@ var BlogController = {
 
 App.module("BlogModule", {
     define: function(BlogModule, App, Backbone, Marionette, $, _) {
-        
         var AppRouter = Backbone.Marionette.AppRouter.extend({
             controller: BlogController,
-
             appRoutes: {
                 "blogs": "index",
                 "blog/:id": "show",

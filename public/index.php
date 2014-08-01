@@ -47,6 +47,13 @@ $app->group('/api', function() use ($app, $data) {
         file_put_contents(__DIR__ . '/../data/blogs.json', json_encode($data));
         echo json_encode($post);
     });
+
+    $app->post('/contact', function () use ($app) {
+        sleep(2);
+        $post = json_decode($app->request()->getBody(), true);
+        $post['id'] = uniqid();
+        echo json_encode($post);
+    });
 });
 
 $app->hook('slim.before', function () use ($app) {

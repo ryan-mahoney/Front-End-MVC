@@ -8,7 +8,8 @@ var browserify = require('gulp-browserify'),
     handlebars = require('gulp-handlebars'),
     defineModule = require('gulp-define-module'),
     declare = require('gulp-declare'),
-    runSequence = require('gulp-run-sequence');
+    runSequence = require('gulp-run-sequence'),
+    fs = require('fs');
 
 gulp.task('default', function(cb) {
     runSequence('templates', 'mvc', cb);
@@ -16,11 +17,11 @@ gulp.task('default', function(cb) {
 
 gulp.task('mvc', function (cb) {
     return gulp.src([
-            'public/js/App.js',
+            'js/App.js',
             'public/build/js/templates.js',
-            'public/js/modules/**/models/*.js',
-            'public/js/modules/**/views/*.js',
-            'public/js/modules/**/*.js'
+            'js/modules/**/models/*.js',
+            'js/modules/**/views/*.js',
+            'js/modules/**/*.js'
         ])
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc.js'))
@@ -43,16 +44,16 @@ gulp.task('mvc', function (cb) {
 });
 
 gulp.task('watch', function(cb) {
-    gulp.watch('public/js/App.js', ['mvc']);
+    gulp.watch('js/App.js', ['mvc']);
     gulp.watch('public/build/js/templates.js', ['mvc']);
-    gulp.watch('public/js/modules/**/models/*.js', ['mvc']);
-    gulp.watch('public/js/modules/**/views/*.js', ['mvc']);
-    gulp.watch('public/js/modules/**/*.js', ['mvc']);
-    gulp.watch('public/js/modules/**/templates/*.hbs', ['templates']);
+    gulp.watch('js/modules/**/models/*.js', ['mvc']);
+    gulp.watch('js/modules/**/views/*.js', ['mvc']);
+    gulp.watch('js/modules/**/*.js', ['mvc']);
+    gulp.watch('js/modules/**/templates/*.hbs', ['templates']);
 });
 
 gulp.task('templates', function(cb) {
-    return gulp.src(['public/js/modules/**/templates/*.hbs'])
+    return gulp.src(['js/modules/**/templates/*.hbs'])
         .pipe(handlebars())
         .pipe(defineModule('plain'))
         .pipe(declare({
