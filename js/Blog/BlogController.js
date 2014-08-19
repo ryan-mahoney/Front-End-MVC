@@ -1,3 +1,11 @@
+var 
+    BlogCollection = require('Blog/models/BlogCollection'),
+    BlogModel = require('Blog/models/BlogModel'),
+    BlogIndexListView = require('Blog/views/BlogIndexListView'),
+    BlogShowView = require('Blog/views/BlogShowView'),
+    BlogEditView = require('Blog/views/BlogEditView'),
+    App = require('App');
+
 var BlogController = {
     index: function () {
         var collection = new BlogCollection({
@@ -36,26 +44,4 @@ var BlogController = {
     }
 };
 
-App.module("BlogModule", {
-    define: function(BlogModule, App, Backbone, Marionette, $, _) {
-        var AppRouter = Backbone.Marionette.AppRouter.extend({
-            controller: BlogController,
-            appRoutes: {
-                "blogs": "index",
-                "blog/:id": "show",
-                "blog/:id/edit": "edit",
-                "blog": "add"
-            }
-        });
-
-        BlogModule.addInitializer(function(options) {
-            new AppRouter();
-        });
-
-        BlogModule.on("start", function() {
-            if (App.getCurrentRoute() === ""){
-                window.location.hash = 'blogs';
-            }
-        });
-    }
-});
+module.exports = BlogController;

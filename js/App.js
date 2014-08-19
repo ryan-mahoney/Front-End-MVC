@@ -1,22 +1,14 @@
-var _ = require('underscore'),
-	$ = require('jquery'),
-	Backbone = require('backbone'),
-	Handlebars = require('handlebars');
+var 
+	Backbone = require('library/BackboneShim'),
+	Marionette = require('library/MarionetteShim'),
+	$ = require('jquery');
 
-Backbone.$ = $;
-var Marionette = require('backbone.marionette');
-jQuery = $;
-var Semantic = require('../public/vendor/semantic/javascript/semantic.js');
-var serializeObject = require('../public/vendor/jquery.serializeObject.min.js');
-Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(template) {
-	return App.Templates[template];
-};
+//jQuery = $;
+//var Semantic = require('../public/vendor/semantic/javascript/semantic.js');
+//var serializeObject = require('../public/vendor/jquery.serializeObject.min.js');
 
-Backbone.Marionette.TemplateCache.prototype.loadTemplate = function(template) {
-	return template.replace('#', '');
-};
 
-var App = new Backbone.Marionette.Application();
+var App = new Marionette.Application();
 
 App.addRegions({
 	mainRegion: '#content',
@@ -37,3 +29,5 @@ App.on("start", function() {
 $(document).ready(function () {
 	App.start();
 });
+
+module.exports = App;

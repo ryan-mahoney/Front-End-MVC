@@ -1,4 +1,9 @@
-var BlogShowView = Backbone.Marionette.ItemView.extend({
+var
+	Backbone = require('library/BackboneShim'),
+    Marionette = require('library/MarionetteShim'),
+	$ = require('jquery');
+
+var BlogShowView = Marionette.ItemView.extend({
     template: "#BlogShow",
     className: 'blog-single',
     events: {
@@ -9,3 +14,5 @@ var BlogShowView = Backbone.Marionette.ItemView.extend({
         window.location.hash = 'blog/' + id + '/edit';
     }
 });
+
+module.exports = BlogShowView;

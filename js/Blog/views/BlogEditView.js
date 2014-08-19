@@ -1,4 +1,9 @@
-var BlogEditView = Backbone.Marionette.ItemView.extend({
+var 
+    Backbone = require('library/BackboneShim'),
+    Marionette = require('library/MarionetteShim'),
+    $ = require('jquery');
+
+var BlogEditView = Marionette.ItemView.extend({
     template: "#BlogEdit",
     className: 'blog-edit',
     events: {
@@ -26,3 +31,5 @@ var BlogEditView = Backbone.Marionette.ItemView.extend({
         }
     }
 });
+
+module.exports = BlogEditView;

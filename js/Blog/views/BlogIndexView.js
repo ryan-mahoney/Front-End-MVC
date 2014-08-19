@@ -1,4 +1,9 @@
-var BlogIndexView = Backbone.Marionette.ItemView.extend({
+var 
+    Backbone = require('library/BackboneShim'),
+    Marionette = require('library/MarionetteShim'),
+    $ = require('jquery');
+
+var BlogIndexView = Marionette.ItemView.extend({
     template: "#BlogIndex",
     events: {
         "click .blog-show":          "show",
@@ -13,7 +18,4 @@ var BlogIndexView = Backbone.Marionette.ItemView.extend({
     }
 });
 
-var BlogIndexListView = Backbone.Marionette.CollectionView.extend({
-    className: 'blog-list',
-    childView: BlogIndexView
-});
+module.exports = BlogIndexView;

@@ -1,4 +1,9 @@
-var ContactView = Backbone.Marionette.ItemView.extend({
+var
+    Backbone = require('library/BackboneShim'),
+    Marionette = require('library/MarionetteShim'),
+    $ = require('jquery');
+
+var ContactView = Marionette.ItemView.extend({
     template: "#Contact",
     className: 'contact',
     events: {
@@ -21,3 +26,5 @@ var ContactView = Backbone.Marionette.ItemView.extend({
         });
     }
 });
+
+module.exports = ContactView;

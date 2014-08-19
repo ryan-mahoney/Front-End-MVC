@@ -18,6 +18,7 @@ var browserify = require('gulp-browserify'),
 
 gulp.task('default', function(cb) {
     runSequence('helpers-step-1', 'helpers-step-2', 'templates', 'mvc', 'clean', cb);
+    //runSequence('mvc');
 });
 
 gulp.task('mvc', function (cb) {
@@ -29,17 +30,21 @@ gulp.task('mvc', function (cb) {
             'js/App.js',
             'public/build/js/templates.js',
             'public/build/js/helpers.js',
-            'js/modules/**/models/*.js',
-            'js/modules/**/views/*.js',
-            'js/modules/**/*Module.js'
+            'js/**/models/*.js',
+            'js/**/views/*.js',
+            'js/**/*Module.js',
+            'js/**/*Controller.js',
+            'js/**/*Router.js',
         ])
         .pipe(plumber())
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc-' + version + '.js'))
         .pipe(browserify({
-            insertGlobals : true, 
-            debug : true,
+            paths: ['./node_modules','./js/'],
+            insertGlobals : false, 
+            debug : false,
+            /*
             shim: {
                 serializeObject: {
                     path: 'public/vendor/jquery.serializeObject.min.js',
@@ -49,38 +54,39 @@ gulp.task('mvc', function (cb) {
                     }
                 }
             }
+            */
         }))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('public/build/js'));
 });
 
 gulp.task('watch', function(cb) {
     gulp.watch('js/App.js', ['default']);
     gulp.watch('js/helpers/*.js', ['default']);
-    gulp.watch('js/modules/**/models/*.js', ['default']);
-    gulp.watch('js/modules/**/views/*.js', ['default']);
-    gulp.watch('js/modules/**/*Module.js', ['default']);
-    gulp.watch('js/modules/**/templates/*.hbs', ['default']);
-    gulp.watch('js/modules/**/helpers/*.hbs', ['default']);
+    gulp.watch('js/**/models/*.js', ['default']);
+    gulp.watch('js/**/views/*.js', ['default']);
+    gulp.watch('js/**/*Module.js', ['default']);
+    gulp.watch('js/**/templates/*.hbs', ['default']);
+    gulp.watch('js/**/helpers/*.hbs', ['default']);
 });
 
 gulp.task('templates', function(cb) {
-    return gulp.src(['js/modules/**/templates/*.hbs'])
+    return gulp.src(['js/**/templates/*.hbs'])
         .pipe(handlebars())
         .pipe(defineModule('plain'))
         .pipe(declare({
-            namespace: 'Templates',
-            root: 'App'
+            namespace: 'contents',
+            root: 'Templates'
         }))
         .pipe(concatUtil('templates.js'))
-        .pipe(concatUtil.header('/* jshint ignore:start */\n'))
-        .pipe(concatUtil.footer('\n/* jshint ignore:end */'))
+        .pipe(concatUtil.header('var \n    Templates = require("library/Templates"),\n    Handlebars = require("handlebars");\n/* jshint ignore:start */\n'))
+        .pipe(concatUtil.footer('\n/* jshint ignore:end */\nconsole.log("templates...");\nconsole.log(Templates);'))
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));
 });
 
 gulp.task('clean', function (cb) {
-    return gulp.src(['public/build/js/templates.js', 'public/build/tmp/helpers/*', 'public/build/js/helpers.js'], {read: false}).pipe(clean());
+    //return gulp.src(['public/build/js/templates.js', 'public/build/tmp/helpers/*', 'public/build/js/helpers.js'], {read: false}).pipe(clean());
 });
 
 gulp.task('helpers', function (cb) {
@@ -94,17 +100,19 @@ gulp.task('helpers-step-1', function (cb) {
             .pipe(concatUtil(name + '.js', {process: function (src) { return 'Handlebars.registerHelper("' + name + '", ' + src + ');'; }}))
             .pipe(gulp.dest('public/build/tmp/helpers'));
     };
-    var files = glob.sync('js/modules/**/helpers/*.js');
+    var files = glob.sync('js/**/helpers/*.js');
     files.map(process);
 
     var files = glob.sync('js/helpers/*.js');
     files.map(process);
 
-    return gulp.src('js/modules/**/helpers/*.js');
+    return gulp.src('js/**/helpers/*.js');
 });
 
 gulp.task('helpers-step-2', function (cb) {
     return gulp.src(['public/build/tmp/helpers/*.js'])
-        .pipe(concatUtil('helpers.js', {separator: '\n'}))
+        .pipe(concatUtil('helpers.js', {separator: '\n\n'}))
+        .pipe(concatUtil.header('var Handlebars = require("handlebars");\n\n/* jshint ignore:start */\n'))
+        .pipe(concatUtil.footer('\n/* jshint ignore:end */'))
         .pipe(gulp.dest('public/build/js'));
 });
