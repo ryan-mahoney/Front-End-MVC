@@ -27,34 +27,17 @@ gulp.task('mvc', function (cb) {
     gulp.src('public/build/js/mvc-*', {read: false}).pipe(clean());
 
     return gulp.src([
-            'js/App.js',
             'public/build/js/templates.js',
             'public/build/js/helpers.js',
-            'js/**/models/*.js',
-            'js/**/views/*.js',
             'js/**/*Module.js',
-            'js/**/*Controller.js',
-            'js/**/*Router.js',
         ])
         .pipe(plumber())
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc-' + version + '.js'))
         .pipe(browserify({
-            //paths: ['./node_modules','./js/'],
             insertGlobals : false, 
             debug : false,
-            /*
-            shim: {
-                serializeObject: {
-                    path: 'public/vendor/jquery.serializeObject.min.js',
-                    exports: 'serializeObject',
-                    depends: {
-                        jquery: '$'
-                    }
-                }
-            }
-            */
         }))
         //.pipe(uglify())
         .pipe(gulp.dest('public/build/js'));
@@ -75,12 +58,11 @@ gulp.task('templates', function(cb) {
         .pipe(handlebars())
         .pipe(defineModule('plain'))
         .pipe(declare({
-            namespace: 'contents',
             root: 'Templates'
         }))
         .pipe(concatUtil('templates.js'))
         .pipe(concatUtil.header('var \n    Templates = require("app/library/Templates"),\n    Handlebars = require("handlebars");\n/* jshint ignore:start */\n'))
-        .pipe(concatUtil.footer('\n/* jshint ignore:end */\nconsole.log("templates...");\nconsole.log(Templates);'))
+        .pipe(concatUtil.footer('\n/* jshint ignore:end */\n'))
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));
 });

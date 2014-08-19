@@ -3,11 +3,6 @@ var
 	Marionette = require('./library/MarionetteShim'),
 	$ = require('jquery');
 
-//jQuery = $;
-//var Semantic = require('../public/vendor/semantic/javascript/semantic.js');
-//var serializeObject = require('../public/vendor/jquery.serializeObject.min.js');
-
-
 var App = new Marionette.Application();
 
 App.addRegions({
