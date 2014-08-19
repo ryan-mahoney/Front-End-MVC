@@ -1,6 +1,6 @@
 var 
-	Backbone = require('library/BackboneShim'),
-	Marionette = require('library/MarionetteShim'),
+	Backbone = require('./library/BackboneShim'),
+	Marionette = require('./library/MarionetteShim'),
 	$ = require('jquery');
 
 //jQuery = $;

@@ -1,6 +1,6 @@
 var 
-    Backbone = require('library/BackboneShim'),
-    Marionette = require('library/MarionetteShim'),
+    Backbone = require('app/library/BackboneShim'),
+    Marionette = require('app/library/MarionetteShim'),
     $ = require('jquery');
 
 var BlogEditView = Marionette.ItemView.extend({

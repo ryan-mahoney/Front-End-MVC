@@ -1,7 +1,7 @@
 var
-	Backbone = require('library/BackboneShim'),
-	Marionette = require('library/MarionetteShim'),
-	BlogController = require('Blog/BlogController');
+	Backbone = require('app/library/BackboneShim'),
+	Marionette = require('app/library/MarionetteShim'),
+	BlogController = require('app/Blog/BlogController');
 
 var BlogRouter = Marionette.AppRouter.extend({
     controller: BlogController,

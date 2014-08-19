@@ -1,8 +1,8 @@
 var 
 	_ = require('underscore'),
-	Backbone = require('library/BackboneShim'),
+	Backbone = require('app/library/BackboneShim'),
 	Marionette = require('backbone.marionette'),
-	Templates = require('library/Templates');
+	Templates = require('app/library/Templates');
 
 Marionette.TemplateCache.prototype.compileTemplate = function(template) {
 	console.log('A:' + template);

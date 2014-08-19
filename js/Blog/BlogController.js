@@ -1,10 +1,10 @@
 var 
-    BlogCollection = require('Blog/models/BlogCollection'),
-    BlogModel = require('Blog/models/BlogModel'),
-    BlogIndexListView = require('Blog/views/BlogIndexListView'),
-    BlogShowView = require('Blog/views/BlogShowView'),
-    BlogEditView = require('Blog/views/BlogEditView'),
-    App = require('App');
+    BlogCollection = require('app/Blog/models/BlogCollection'),
+    BlogModel = require('app/Blog/models/BlogModel'),
+    BlogIndexListView = require('app/Blog/views/BlogIndexListView'),
+    BlogShowView = require('app/Blog/views/BlogShowView'),
+    BlogEditView = require('app/Blog/views/BlogEditView'),
+    App = require('app/App');
 
 var BlogController = {
     index: function () {

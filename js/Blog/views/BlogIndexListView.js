@@ -1,7 +1,7 @@
 var 
-	Backbone = require('library/BackboneShim'),
-	Marionette = require('library/MarionetteShim'),
-	BlogIndexView = require('Blog/views/BlogIndexView');
+	Backbone = require('app/library/BackboneShim'),
+	Marionette = require('app/library/MarionetteShim'),
+	BlogIndexView = require('app/Blog/views/BlogIndexView');
 
 var BlogIndexListView = Marionette.CollectionView.extend({
     className: 'blog-list',

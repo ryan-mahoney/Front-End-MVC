@@ -41,7 +41,7 @@ gulp.task('mvc', function (cb) {
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(concat('mvc-' + version + '.js'))
         .pipe(browserify({
-            paths: ['./node_modules','./js/'],
+            //paths: ['./node_modules','./js/'],
             insertGlobals : false, 
             debug : false,
             /*
@@ -79,7 +79,7 @@ gulp.task('templates', function(cb) {
             root: 'Templates'
         }))
         .pipe(concatUtil('templates.js'))
-        .pipe(concatUtil.header('var \n    Templates = require("library/Templates"),\n    Handlebars = require("handlebars");\n/* jshint ignore:start */\n'))
+        .pipe(concatUtil.header('var \n    Templates = require("app/library/Templates"),\n    Handlebars = require("handlebars");\n/* jshint ignore:start */\n'))
         .pipe(concatUtil.footer('\n/* jshint ignore:end */\nconsole.log("templates...");\nconsole.log(Templates);'))
         .pipe(clean({force: true}))
         .pipe(gulp.dest('public/build/js'));

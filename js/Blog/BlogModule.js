@@ -1,8 +1,8 @@
 var
-    Backbone = require('library/BackboneShim'),
-    BlogController = require('Blog/BlogController'),
-    BlogRouter = require('Blog/BlogRouter'),
-    App = require('App');
+    Backbone = require('app/library/BackboneShim'),
+    BlogController = require('app/Blog/BlogController'),
+    BlogRouter = require('app/Blog/BlogRouter'),
+    App = require('app/App');
 
 App.module("BlogModule", {
     define: function(BlogModule, App, Backbone, Marionette, $, _) {

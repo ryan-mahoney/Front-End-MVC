@@ -1,7 +1,7 @@
 var
-	ContactView = require('Contact/views/ContactView'),
-	ContactModel = require('Contact/models/ContactModel'),
-	App = require('App.js');
+	ContactView = require('app/Contact/views/ContactView'),
+	ContactModel = require('app/Contact/models/ContactModel'),
+	App = require('app/App');
 
 var ContactController = {
     add: function () {
