@@ -108,9 +108,9 @@ gulp.task('templates', function(cb) {
 
 gulp.task('clean', function (cb) {
     return gulp.src([
-        paths.dest + '/js/templates.js', 
-        paths.dest + '/tmp/helpers/*', 
-        paths.dest + '/js/helpers.js'
+        paths.dest + 'js/templates.js', 
+        paths.dest + 'tmp/helpers/*', 
+        paths.dest + 'js/helpers.js'
     ], {read: false}).pipe(clean());
 });
 
