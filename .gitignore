@@ -1,4 +1,4 @@
-node_modules
-public/build
-composer.lock
-vendor
+/node_modules
+/public/build
+/composer.lock
+/vendor
