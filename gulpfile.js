@@ -12,7 +12,8 @@ var browserify = require('gulp-browserify'),
     fs = require('fs');
     concatUtil = require('gulp-concat-util'),
     glob = require('glob'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    rename = require('gulp-rename');
 
 var environment = 'development';
 
@@ -54,6 +55,7 @@ gulp.task('vendor', function (cb) {
 gulp.task('mvc', function (cb) {
     var version = uuid.v4();
     fs.writeFile(paths.dest + 'js/version.php', '<?php return "' + version + '";');
+    fs.writeFile(paths.dest + 'js/version.json', '{"version": "' + version + '"}');
     gulp.src(paths.dest + 'js/mvc-*', {read: false}).pipe(clean());
 
     var stream = gulp.src([
@@ -71,7 +73,10 @@ gulp.task('mvc', function (cb) {
     if (environment == 'production') {
         stream.pipe(uglify());
     }
-    stream.pipe(gulp.dest(paths.dest + 'js'));
+    stream
+        .pipe(gulp.dest(paths.dest + 'js'))
+        .pipe(rename('mvc.js'))
+        .pipe(gulp.dest(paths.dest + 'js'))
     return stream;
 });
 
