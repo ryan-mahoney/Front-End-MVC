@@ -12,13 +12,16 @@ gulp production
 gulp watch
 ```
 
+note: the backend for this demo is written in PHP, that is why composer is used, with apache.  This part could be re-written in pure node in the future.
+
 ### Folder Structure
 
 ```
 ├── js/
 │   ├── app/
 │   │   ├── App.js
-│   │   ├── Helpers.js
+│   │   ├── Helpers/
+│   │   │   ├── GlobalHelperA.js
 │   │   ├── ModuleA/
 │   │   │   ├── ModuleA.js
 │   │   │   ├── ModuleAController.js
