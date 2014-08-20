@@ -47,6 +47,18 @@ gulp watch
 │   │   │   ├── vendor.js
 ```
 
+### HTML Usage
+
+```html
+<html>
+    <head>
+        <script src="/build/js/vendor.js"></script>
+        <script src="/build/js/mvc.js"></script>
+    </head>
+    <body><body>
+</html>
+```
+
 ### The Problem
 
 Despite the availability of high quality front-end frameworks for building complex Javascript applications, often such frameworks are either not utilized, or incorporated in a sub-optimal manner. The effect of this problem is that front-ends are built with inconsistent methodologies that tend to be more error-prone and ultimately cost more to create and maintain over time. 
