@@ -8,8 +8,13 @@ git clone git@github.com:ryan-mahoney/Front-End-MVC.git
 cd Front-End-MVC
 composer install
 npm install
-gulp
+gulp production
+gulp watch
 ```
+
+### Folder Structure
+
+abc
 
 ### The Problem
 
@@ -47,11 +52,11 @@ Javascript has long been plagued by dependency management and version incompatib
 
 ## Architectural Overview
 
-The development folder structure is located in {project}/js and compiles into {project}/public/build/js/mvc-{uuid}.js where “public” is the webroot.
+The development folder structure is located in {project}/js/app and compiles into {project}/public/build/js/mvc-{uuid}.js where “public” is the webroot.
 
 In the js folder, there is an App.js file that addresses dependency loading and the application's central bootstrapping.  This file will play the role of front-controller to the Javascript application. This is also the place to add front-end JS depenedencies.  In some case, a shim may need to be added in the gulpfile.js.
 
-In the js folder, there is a sub-folder named “modules”.  The modules folder contains a subdirectory named for each distinct module.  Within each module folder, there is a {Name}Module.js file that contains the module's definition and controller. Marionette modules have only one controller. There are sub-folders for views, models, templates and helpers. Modules can easily be used accross projects.
+In the js folder, there is a sub-folder named “app”.  The app folder contains a subdirectory named for each distinct module.  Within each module folder, there is a {Name}Module.js file that contains the module's definition, as well as a {Name}Controller and {Name}Router. Marionette modules have only one controller. There are sub-folders for views, models, templates and helpers. Modules can easily be used accross projects.
 
 Module files utilize a strict naming convention to prevent naming collisions and clarify the role of each Javascript object.  For example: FooModule.js, FooSidebarModel.js, FooSidebarView.js, etc.
 
