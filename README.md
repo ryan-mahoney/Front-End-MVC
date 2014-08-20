@@ -14,7 +14,38 @@ gulp watch
 
 ### Folder Structure
 
-abc
+```
+├── js/
+│   ├── app/
+│   │   ├── App.js
+│   │   ├── Helpers.js
+│   │   ├── ModuleA/
+│   │   │   ├── ModuleA.js
+│   │   │   ├── ModuleAController.js
+│   │   │   ├── ModuleARouter.js
+│   │   │   │   ├── Models/
+│   │   │   │   │   ├── ModuleAModel.js
+│   │   │   │   │   ├── ModuleACollection.js
+│   │   │   │   ├── Views/
+│   │   │   │   │   ├── ModuleAIndexView.js
+│   │   │   │   │   ├── ModuleAView.js
+│   │   │   │   ├── Templates/
+│   │   │   │   │   ├── ModuleAIndex.hbs
+│   │   │   │   │   ├── Module.hbs
+│   │   │   │   ├── Helpers/
+│   │   │   │   │   ├── SomeHelper.js
+│   ├── vendor
+│   │   ├── jquery.js
+│   │   ├── handlebars.js
+│   │   ├── backbone.js
+│   │   ├── backbone.marionette.js
+│   │   ├── etc...
+├── publc/
+│   ├── build/
+│   │   ├── js/
+│   │   │   ├── mvc-{uniq}.js
+│   │   │   ├── vendor.js
+```
 
 ### The Problem
 
