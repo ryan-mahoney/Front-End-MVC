@@ -4,7 +4,6 @@ var browserify = require('gulp-browserify'),
     clean = require('gulp-clean'),
     uglify = require('gulp-uglify'),
     jshint = require('gulp-jshint'),
-    clean = require('gulp-clean'),
     handlebars = require('gulp-handlebars'),
     defineModule = require('gulp-define-module'),
     declare = require('gulp-declare'),
@@ -13,62 +12,101 @@ var browserify = require('gulp-browserify'),
     fs = require('fs');
     concatUtil = require('gulp-concat-util'),
     glob = require('glob'),
-    path = require('path'),
     plumber = require('gulp-plumber');
+
+var environment = 'development';
+
+var paths = {
+    src: './js/app/',
+    dest: './public/build/',
+    vendor: './js/vendor/',
+    assets: './assets/'
+}
+
+gulp.task('set-production', function() {
+    environment = 'production';
+});
 
 gulp.task('default', function(cb) {
     runSequence('helpers-step-1', 'helpers-step-2', 'templates', 'mvc', 'clean', cb);
-    //runSequence('mvc');
+});
+
+gulp.task('vendor', function (cb) {
+    var stream = gulp.src([
+        paths.vendor + 'jquery-2.1.1.js',
+        paths.vendor + 'handlebars-v1.3.0.js',
+        paths.vendor + 'underscore.js',
+        paths.vendor + 'backbone.js',
+        paths.vendor + 'backbone.wreqr.js',
+        paths.vendor + 'backbone.babysitter.js',
+        paths.vendor + 'backbone.marionette.js',
+        paths.vendor + 'backbone.syphon.js',
+    ])
+    .pipe(concat('vendor.js'));
+
+    stream.pipe(uglify());
+    
+    stream.pipe(gulp.dest(paths.dest + 'js'));
+
+    return stream;
 });
 
 gulp.task('mvc', function (cb) {
     var version = uuid.v4();
-    fs.writeFile('public/build/js/version.php', '<?php return "' + version + '";');
-    gulp.src('public/build/js/mvc-*', {read: false}).pipe(clean());
+    fs.writeFile(paths.dest + 'js/version.php', '<?php return "' + version + '";');
+    gulp.src(paths.dest + 'js/mvc-*', {read: false}).pipe(clean());
 
-    return gulp.src([
-            'public/build/js/templates.js',
-            'public/build/js/helpers.js',
-            'js/**/*Module.js',
-        ])
-        .pipe(plumber())
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(concat('mvc-' + version + '.js'))
-        .pipe(browserify({
-            insertGlobals : false, 
-            debug : false,
-        }))
-        //.pipe(uglify())
-        .pipe(gulp.dest('public/build/js'));
+    var stream = gulp.src([
+        paths.dest + 'js/templates.js',
+        paths.dest + 'js/helpers.js',
+        paths.src + '**/*Module.js',
+    ])
+    .pipe(plumber())
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(concat('mvc-' + version + '.js'))
+    .pipe(browserify({
+        paths: ['./node_modules','./js/app'],
+    }));
+    if (environment == 'production') {
+        stream.pipe(uglify());
+    }
+    stream.pipe(gulp.dest(paths.dest + 'js'));
+    return stream;
 });
 
 gulp.task('watch', function(cb) {
-    gulp.watch('js/App.js', ['default']);
-    gulp.watch('js/helpers/*.js', ['default']);
-    gulp.watch('js/**/models/*.js', ['default']);
-    gulp.watch('js/**/views/*.js', ['default']);
-    gulp.watch('js/**/*Module.js', ['default']);
-    gulp.watch('js/**/templates/*.hbs', ['default']);
-    gulp.watch('js/**/helpers/*.hbs', ['default']);
+    gulp.watch(paths.src + 'App.js', ['default']);
+    gulp.watch(paths.src + 'Helpers/*.js', ['default']);
+    gulp.watch(paths.src + '**/Models/*.js', ['default']);
+    gulp.watch(paths.src + '**/Views/*.js', ['default']);
+    gulp.watch(paths.src + '**/*Module.js', ['default']);
+    gulp.watch(paths.src + '**/Templates/*.hbs', ['default']);
+    gulp.watch(paths.src + '**/Helpers/*.hbs', ['default']);
+    gulp.watch(paths.vendor + '/**/*.js', ['vendor']);
 });
 
 gulp.task('templates', function(cb) {
-    return gulp.src(['js/**/templates/*.hbs'])
+    return gulp.src([paths.src + '**/Templates/*.hbs'])
         .pipe(handlebars())
         .pipe(defineModule('plain'))
         .pipe(declare({
-            root: 'Templates'
+            namespace: 'templates',
+            root: 'App'
         }))
         .pipe(concatUtil('templates.js'))
-        .pipe(concatUtil.header('var \n    Templates = require("app/library/Templates"),\n    Handlebars = require("handlebars");\n/* jshint ignore:start */\n'))
+        .pipe(concatUtil.header('var App = require("App");\n/* jshint ignore:start */\n'))
         .pipe(concatUtil.footer('\n/* jshint ignore:end */\n'))
         .pipe(clean({force: true}))
-        .pipe(gulp.dest('public/build/js'));
+        .pipe(gulp.dest(paths.dest + 'js'));
 });
 
 gulp.task('clean', function (cb) {
-    //return gulp.src(['public/build/js/templates.js', 'public/build/tmp/helpers/*', 'public/build/js/helpers.js'], {read: false}).pipe(clean());
+    return gulp.src([
+        paths.dest + '/js/templates.js', 
+        paths.dest + '/tmp/helpers/*', 
+        paths.dest + '/js/helpers.js'
+    ], {read: false}).pipe(clean());
 });
 
 gulp.task('helpers', function (cb) {
@@ -80,21 +118,23 @@ gulp.task('helpers-step-1', function (cb) {
         var name = file.split('/').pop().replace(/\.js$/, '');
         gulp.src(file)
             .pipe(concatUtil(name + '.js', {process: function (src) { return 'Handlebars.registerHelper("' + name + '", ' + src + ');'; }}))
-            .pipe(gulp.dest('public/build/tmp/helpers'));
+            .pipe(gulp.dest(paths.dest + 'tmp/helpers'));
     };
-    var files = glob.sync('js/**/helpers/*.js');
+    var files = glob.sync(paths.src + '**/Helpers/*.js');
     files.map(process);
 
-    var files = glob.sync('js/helpers/*.js');
+    var files = glob.sync(paths.src + 'Helpers/*.js');
     files.map(process);
 
-    return gulp.src('js/**/helpers/*.js');
+    return gulp.src(paths.src + '**/Helpers/*.js');
 });
 
 gulp.task('helpers-step-2', function (cb) {
-    return gulp.src(['public/build/tmp/helpers/*.js'])
+    return gulp.src(paths.dest + 'tmp/helpers/*.js')
         .pipe(concatUtil('helpers.js', {separator: '\n\n'}))
-        .pipe(concatUtil.header('var Handlebars = require("handlebars");\n\n/* jshint ignore:start */\n'))
+        .pipe(concatUtil.header('/* jshint ignore:start */\n'))
         .pipe(concatUtil.footer('\n/* jshint ignore:end */'))
-        .pipe(gulp.dest('public/build/js'));
+        .pipe(gulp.dest(paths.dest + 'js'));
 });
+
+gulp.task('production', ['set-production', 'vendor', 'default']);

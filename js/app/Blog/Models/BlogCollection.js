@@ -1,6 +1,5 @@
 var 
-	Backbone = require('app/library/BackboneShim'),
-	BlogModel = require('app/Blog/models/BlogModel');
+	BlogModel = require('Blog/Models/BlogModel');
 
 var BlogCollection = Backbone.Collection.extend({
     model: BlogModel,

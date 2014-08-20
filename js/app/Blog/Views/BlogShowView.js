@@ -1,8 +1,3 @@
-var
-	Backbone = require('app/library/BackboneShim'),
-    Marionette = require('app/library/MarionetteShim'),
-	$ = require('jquery');
-
 var BlogShowView = Marionette.ItemView.extend({
     template: "#BlogShow",
     className: 'blog-single',

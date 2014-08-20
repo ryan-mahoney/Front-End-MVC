@@ -1,6 +1,6 @@
 var
-    App = require('app/App'),
-    ContactRouter = require('app/Contact/ContactRouter');
+    App = require('App'),
+    ContactRouter = require('Contact/ContactRouter');
 
 
 App.module("ContactModule", {

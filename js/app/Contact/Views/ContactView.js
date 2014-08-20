@@ -1,20 +1,14 @@
-var
-    Backbone = require('app/library/BackboneShim'),
-    Marionette = require('app/library/MarionetteShim'),
-    $ = require('jquery');
-
 var ContactView = Marionette.ItemView.extend({
     template: "#Contact",
     className: 'contact',
     events: {
-        "click .contact-submit":           "submit",
         "submit #contact-form":            "submit"
     },
     submit: function (e) {
         e.preventDefault();
         $('#contact-form').addClass('loading');
         var model = this.model;
-        var data = $('#contact-form').serializeObject();
+        var data = Backbone.Syphon.serialize(this);
         if (data.id === '') {
             delete data.id;
         }

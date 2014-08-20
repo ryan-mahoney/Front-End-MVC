@@ -1,7 +1,5 @@
 var
-	Backbone = require('app/library/BackboneShim'),
-	Marionette = require('app/library/MarionetteShim'),
-	ContactController = require('app/Contact/ContactController');
+	ContactController = require('Contact/ContactController');
 
 var ContactRouter = Marionette.AppRouter.extend({
     controller: ContactController,

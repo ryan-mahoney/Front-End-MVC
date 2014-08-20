@@ -1,9 +1,12 @@
-var 
-	Backbone = require('./library/BackboneShim'),
-	Marionette = require('./library/MarionetteShim'),
-	$ = require('jquery');
-
 var App = new Marionette.Application();
+
+Marionette.TemplateCache.prototype.compileTemplate = function(template) {
+	return App.templates[template];
+};
+
+Marionette.TemplateCache.prototype.loadTemplate = function(template) {
+	return template.replace('#', '');
+};
 
 App.addRegions({
 	mainRegion: '#content',
@@ -22,6 +25,7 @@ App.on("start", function() {
 });
 
 $(document).ready(function () {
+	//get an api_token
 	App.start();
 });
 

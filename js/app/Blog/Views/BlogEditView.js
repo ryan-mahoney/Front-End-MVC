@@ -1,13 +1,7 @@
-var 
-    Backbone = require('app/library/BackboneShim'),
-    Marionette = require('app/library/MarionetteShim'),
-    $ = require('jquery');
-
 var BlogEditView = Marionette.ItemView.extend({
     template: "#BlogEdit",
     className: 'blog-edit',
     events: {
-        "click .blog-submit":           "submit",
         "submit #blog-form":            "submit",
         "focus .blog-title":            "clear"
     },
@@ -15,7 +9,7 @@ var BlogEditView = Marionette.ItemView.extend({
         e.preventDefault();
         $('#blog-form').addClass('loading');
         var model = this.model;
-        var data = $('#blog-form').serializeObject();
+        var data = Backbone.Syphon.serialize(this);
         if (data.id === '') {
             delete data.id;
         }
