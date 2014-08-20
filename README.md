@@ -43,7 +43,7 @@ gulp watch
 ├── publc/
 │   ├── build/
 │   │   ├── js/
-│   │   │   ├── mvc-{uniq}.js
+│   │   │   ├── mvc.js
 │   │   │   ├── vendor.js
 ```
 
